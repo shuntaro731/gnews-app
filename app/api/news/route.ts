@@ -1,3 +1,4 @@
+import { error } from "console";
 import { NextResponse } from "next/server";
 
 const BASE = "https://gnews.io/api/v4/top-headlines";
@@ -29,6 +30,19 @@ export async function GET(req: Request) {
   const url = `${BASE}?${params.toString}`;
 
   try {
-    const re = await fetch(url, {cache: "no-store"})
+    const res = await fetch(url, { cache: "no-store" });
+
+    if (!res.ok) {
+      return NextResponse.json(
+        { error: `Upstream error: ${res.status}` },
+        { status: 500 }
+      );
+    }
+
+    const data = await res.json();
+    return NextResponse.json(data, { status: 200 });
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

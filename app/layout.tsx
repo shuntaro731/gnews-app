@@ -11,7 +11,14 @@ export default function RootLayout({
     <html lang="ja">
       <body style={{ fontFamily: "sans-serif, system-ui", margin: 0 }}>
         <header
-          style={{ padding: "12px 16px", borderBottom: "1px solid #eee" }}
+          style={{
+            padding: "12px 16px",
+            borderBottom: "1px solid #eee",
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
+            backdropFilter: "blur(24px)",
+            position: "sticky",
+            top: 0,
+          }}
         >
           <strong>Next.js X Gnews</strong>
         </header>
