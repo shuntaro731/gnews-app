@@ -1,32 +1,29 @@
 import { NextResponse } from "next/server";
 
-const BASE = "https://gnews.io/api/v4/top-headlines";
+const BASE_URL = "https://gnews.io/api/v4/search"; // ← freeプランは search のみ
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const q = searchParams.get("q") || "";
-  const topic = searchParams.get("topic") || "";
+
+  // freeプランでは q は必須
+  const q = searchParams.get("q") || "AI";
   const lang = searchParams.get("lang") || "ja";
-  const country = searchParams.get("country") || "jp";
   const max = searchParams.get("max") || "10";
 
   const token = process.env.GNEWS_API_KEY;
   if (!token) {
-    return NextResponse.json({ error: "missing api" }, { status: 500 });
+    return NextResponse.json({ error: "missing API key" }, { status: 500 });
   }
 
+  // Freeプランは q, lang, max しか使えない
   const params = new URLSearchParams({
+    q,
     lang,
-    country,
-    topic,
     max,
     token,
   });
 
-  if (q) params.set("q", q);
-  if (topic) params.set("topic", topic);
-
-  const url = `${BASE}?${params.toString()}`;
+  const url = `${BASE_URL}?${params.toString()}`;
 
   try {
     const res = await fetch(url, { cache: "no-store" });
@@ -34,7 +31,7 @@ export async function GET(req: Request) {
     if (!res.ok) {
       return NextResponse.json(
         { error: `Upstream error: ${res.status}` },
-        { status: 500 }
+        { status: res.status }
       );
     }
 

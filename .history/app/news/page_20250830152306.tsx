@@ -40,9 +40,11 @@ export default async function NewsPage() {
           >
             <a href={a.url} target="_blank" rel="noreferrer" className="block">
               {a.image && (
-                <img
+                <Image
                   src={a.image}
                   alt={a.title}
+                  width={800}
+                  height={450}
                   className="w-full rounded-md mb-4 object-cover"
                 />
               )}

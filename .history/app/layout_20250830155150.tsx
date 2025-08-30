@@ -13,7 +13,7 @@ export default function RootLayout({
         <header
           style={{
             padding: "12px 16px",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
             backdropFilter: "blur(32px)",
             position: "sticky",
             top: 0,

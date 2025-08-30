@@ -11,12 +11,9 @@ type ArticleProps = {
 
 async function fetchTopHeadlines() {
   const API_PATH = "/api/news?lang=ja&country=jp&max=10";
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL ?? ""}${API_PATH}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const res = await fetch(`http://localhost:3000${API_PATH}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch news headlines.");
@@ -40,9 +37,11 @@ export default async function NewsPage() {
           >
             <a href={a.url} target="_blank" rel="noreferrer" className="block">
               {a.image && (
-                <img
+                <Image
                   src={a.image}
                   alt={a.title}
+                  width={800}
+                  height={450}
                   className="w-full rounded-md mb-4 object-cover"
                 />
               )}

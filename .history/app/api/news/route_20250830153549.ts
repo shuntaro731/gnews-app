@@ -11,6 +11,7 @@ export async function GET(req: Request) {
   const max = searchParams.get("max") || "10";
 
   const token = process.env.GNEWS_API_KEY;
+  console.log(token);
   if (!token) {
     return NextResponse.json({ error: "missing api" }, { status: 500 });
   }
@@ -26,7 +27,7 @@ export async function GET(req: Request) {
   if (q) params.set("q", q);
   if (topic) params.set("topic", topic);
 
-  const url = `${BASE}?${params.toString()}`;
+  const url = `${BASE}?${params.toString}`;
 
   try {
     const res = await fetch(url, { cache: "no-store" });

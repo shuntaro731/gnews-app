@@ -14,7 +14,7 @@ export default function RootLayout({
           style={{
             padding: "12px 16px",
             backgroundColor: "rgba(255, 255, 255, 0.8)",
-            backdropFilter: "blur(32px)",
+            backdropFilter: "blur(24px)",
             position: "sticky",
             top: 0,
           }}

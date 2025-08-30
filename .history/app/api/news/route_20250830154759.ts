@@ -26,7 +26,7 @@ export async function GET(req: Request) {
   if (q) params.set("q", q);
   if (topic) params.set("topic", topic);
 
-  const url = `${BASE}?${params.toString()}`;
+  const url = `${BASE}?${params.toString}`;
 
   try {
     const res = await fetch(url, { cache: "no-store" });

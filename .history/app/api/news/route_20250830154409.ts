@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const BASE = "https://gnews.io/api/v4/top-headlines";
+const BASE_URL = "https://gnews.io/api/v4/search";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -12,21 +12,24 @@ export async function GET(req: Request) {
 
   const token = process.env.GNEWS_API_KEY;
   if (!token) {
-    return NextResponse.json({ error: "missing api" }, { status: 500 });
+    return NextResponse.json({ error: "missing API key" }, { status: 500 });
   }
 
   const params = new URLSearchParams({
-    lang,
-    country,
-    topic,
-    max,
     token,
+    lang,
+    // country,
+    max,
   });
 
-  if (q) params.set("q", q);
-  if (topic) params.set("topic", topic);
+  if (q) {
+    params.set("q", q);
+  }
+  // if (topic) {
+  //   params.set("topic", topic);
+  // }
 
-  const url = `${BASE}?${params.toString()}`;
+  const url = `${BASE_URL}?${params.toString()}`;
 
   try {
     const res = await fetch(url, { cache: "no-store" });
@@ -34,7 +37,7 @@ export async function GET(req: Request) {
     if (!res.ok) {
       return NextResponse.json(
         { error: `Upstream error: ${res.status}` },
-        { status: 500 }
+        { status: res.status }
       );
     }
 

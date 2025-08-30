@@ -18,7 +18,6 @@ export async function GET(req: Request) {
   const params = new URLSearchParams({
     lang,
     country,
-    topic,
     max,
     token,
   });
