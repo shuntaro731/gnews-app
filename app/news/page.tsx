@@ -1,0 +1,13 @@
+type ArticleProps = {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  publishedAt: string;
+  source?: { name: string; url: string };
+};
+
+async function fetchTopHeadlines() {
+  const res = await fetch("/api/news");
+  return <div>page</div>;
+}
