@@ -1,9 +1,10 @@
+import { error } from "console";
 import { NextResponse } from "next/server";
 
 const BASE = "https://gnews.io/api/v4/top-headlines";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
+  const {searchParams} = new URL(req.url);
   const q = searchParams.get("q") || "";
   const topic = searchParams.get("topic") || "";
   const lang = searchParams.get("lang") || "ja";
