@@ -10,20 +10,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body style={{ fontFamily: "sans-serif, system-ui", margin: 0 }}>
-        <header
-          style={{ padding: "12px 16px", borderBottom: "1px solid #eee" }}
-        >
+        <header>
           <strong>Next.js X Gnews</strong>
         </header>
-        <main
-          style={{
-            maxWidth: "960px",
-            margin: "16px auto",
-            padding: "0 12px",
-          }}
-        >
-          {children}
-        </main>
+        <main className="max-w-[960px] mx-4 my-auto px-0 py-12"></main>
+        {children}
       </body>
     </html>
   );

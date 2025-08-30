@@ -18,8 +18,11 @@ export default function RootLayout({
         <main
           style={{
             maxWidth: "960px",
-            margin: "16px auto",
-            padding: "0 12px",
+            marginInline: "calc(0.25rem * 4)", // mx-4
+            marginTop: "auto", // my-auto
+            marginBottom: "auto",
+            paddingInline: "0", // px-0
+            paddingBlock: "calc(0.25rem * 12)", // py-12
           }}
         >
           {children}
