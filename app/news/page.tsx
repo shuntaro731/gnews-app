@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NewsClient from "./NewClient";
 
 type ArticleProps = {
   title: string;
@@ -32,6 +33,8 @@ export default async function NewsPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">最新ニュース</h1>
+      <NewsClient/>
+
       <ul className="space-y-6">
         {articles.map((a) => (
           <li
