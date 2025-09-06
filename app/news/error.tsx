@@ -1,6 +1,6 @@
 "use client"
 
-export default function ({ error, reset }: {error: Error; reset: () => void }){
+function ErrorComponent({ error, reset }: {error: Error; reset: () => void }){
   return(
     <div className="py-10 text-center text-red-500">
       <h2 className="text-xl font-bold mb-4"></h2>
@@ -13,3 +13,5 @@ export default function ({ error, reset }: {error: Error; reset: () => void }){
     </div>
   )
 }
+
+export default ErrorComponent;

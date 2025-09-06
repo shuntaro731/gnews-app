@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 type Article = {
   title: string;
@@ -28,7 +28,7 @@ export default function NewsClient() {
   const [article, setArticle] = useState<Article[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     const p = new URLSearchParams({ lang: "ja", country: "jp", max: "10" });
@@ -41,16 +41,16 @@ export default function NewsClient() {
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? "not fetched");
       setArticle(data.articles ?? []);
-    } catch (e: any) {
-      setError(e?.messege ?? "エラーが発生しました");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "エラーが発生しました");
     } finally {
       setLoading(false);
     }
-  }
+  }, [q, topic]);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <form
@@ -97,10 +97,11 @@ export default function NewsClient() {
             className="rounded-lg border border-gray-200 p-4 shadow-sm transition hover:shadow-md"
           >
             {a.image && (
-              <img
+              <Image
                 src={a.image}
                 alt=""
-                loading="lazy"
+                width={400}
+                height={200}
                 className="mb-3 h-48 w-full rounded-md object-cover"
               />
             )}
