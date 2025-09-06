@@ -97,7 +97,7 @@ export default function NewsClient() {
             className="rounded-lg border border-gray-200 p-4 shadow-sm transition hover:shadow-md"
           >
             {a.image && (
-              <Image
+              <img
                 src={a.image}
                 alt=""
                 width={400}
