@@ -31,7 +31,7 @@ export default function NewsClient() {
   async function load() {
     setLoading(true);
     setError(null);
-    const p = new URLSearchParams({ lang: "ja", country: "ja", max: "10" });
+    const p = new URLSearchParams({ lang: "ja", country: "jp", max: "10" });
     if (q.trim()) p.set("q", q.trim());
     if (topic) p.set("topic", topic);
     try {
@@ -40,7 +40,7 @@ export default function NewsClient() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ?? "not fetched");
-      setArticle(data.article ?? []);
+      setArticle(data.articles ?? []);
     } catch (e: any) {
       setError(e?.messege ?? "エラーが発生しました");
     } finally {
@@ -51,7 +51,7 @@ export default function NewsClient() {
   useEffect(() => {
     load();
   }, []);
-  return(
+  return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <form
         onSubmit={(e) => {
@@ -98,26 +98,22 @@ export default function NewsClient() {
           >
             {a.image && (
               <img
-              src={a.image}
-              alt=""
-              loading="lazy"
-              className="mb-3 h-48 w-full rounded-md object-cover"
+                src={a.image}
+                alt=""
+                loading="lazy"
+                className="mb-3 h-48 w-full rounded-md object-cover"
               />
             )}
             {a.title}
             <a/>
             {a.description && (
-              <p className="mt-2 text-gray-500">
-                {a.description}
-              </p>
+              <p className="mt-2 text-gray-500">{a.description}</p>
             )}
 
             <div className="mt-3 flex flex-col items-center gap-2 text-xs text-gray-500">
               {a.source?.name && <span>{a.source.name}</span>}
               {a.publishedAt && (
-                <span>
-                  {new Date(a.publishedAt).toLocaleString("ja-JP")}
-                </span>
+                <span>{new Date(a.publishedAt).toLocaleString("ja-JP")}</span>
               )}
             </div>
           </li>
